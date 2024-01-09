@@ -9,5 +9,4 @@ fn main() {
     let usr_req: String = get_user_response("What webserver are we building today?");
 
     dbg!(usr_req);
-    
 }
