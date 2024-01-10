@@ -1,5 +1,6 @@
 use crate::models::general::llm::Message;
-
+use crate::helpers::command_line::PrintCommand;
+use crate::apis::call_request::call_gpt;
 
 // This function is used to extend the ai function, it will run the ai function, get the string out of it, extend the string to tell OpenAI that it is a function printer, print the function, and then halluncinate the result of what the function will do. This is essentially uncharted territory.
 
@@ -19,6 +20,35 @@ pub fn extend_ai_function(ai_func: fn(&str) ->  &'static str, func_input: &str)-
     content: msg
    }   
 }
+
+//The following function essentially handles printing the message, extending the ai function, making the call to the LLM, AND IMPORTANTLY if it does not work -- it will try again automatically.
+
+// Performs call to LLM GPT
+pub async fn ai_task_request(
+    msg_context: String,
+    agent_position: &str,
+    agent_operation: &str,
+    function_pass: for<'a> fn(&'a str) -> &'static str,
+) -> String {
+    // Extend AI function
+    let extended_msg: Message = extend_ai_function(function_pass, &msg_context);
+
+    // Print current status
+    PrintCommand::AICall.print_agent_message(agent_position, agent_operation);
+
+    // Get LLM response
+    let llm_response_res: Result<String, Box<dyn std::error::Error + Send>> =
+        call_gpt(vec![extended_msg.clone()]).await;
+
+    // Return Success or try again - this is the logic that will make the code run again if there is an error on the inital run.
+    match llm_response_res {
+        Ok(llm_resp) => llm_resp,
+        Err(_) => call_gpt(vec![extended_msg.clone()])
+            .await
+            .expect("Failed twice to call OpenAI"),
+    }
+}
+
 
 #[cfg(test)]
 mod tests {
