@@ -75,7 +75,6 @@ pub async fn call_gpt(messages: Vec<Message>) -> Result<String, Box<dyn std::err
 
     // send response
     Ok(response.choices[0].message.content.clone())
-
 }
 
 #[cfg(test)]
@@ -93,7 +92,7 @@ mod tests {
 
         if let Ok(response_string) = response {
             dbg!(response_string);
-          assert!(true)
+            assert!(true)
         } else {
             assert!(false)
         }
