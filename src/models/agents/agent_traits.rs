@@ -1,4 +1,4 @@
-use crate::models::agent_basic::basic_agent::AgentState;
+use crate::models::agent_basic::basic_agent::{AgentState, BasicAgent};
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
 use std::fmt::Debug;
@@ -28,3 +28,17 @@ pub struct FactSheet{
     pub backend_code: Option<String>,
     pub api_endpoint_schema: Option<Vec<RouteObject>>,
 }
+
+pub trait SpecialFunctions : Debug {
+
+
+  //Used so that manager can get attributes from agent
+  fn get_attributes_from_agent(&self) -> &BasicAgent;
+
+
+// This function will allow agents to execute their logic
+
+  async fn execute(&mut self, factsheet: &mut FactSheet) -> Result<(), Box<dyn std::error::Error>>;
+
+}
+    

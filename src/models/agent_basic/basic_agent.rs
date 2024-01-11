@@ -6,7 +6,7 @@ pub enum AgentState {
   Discovery,
   Working,
   UnitTesting, 
-  Finshed
+  Finished
 }
 
 #[derive(Debug)]
