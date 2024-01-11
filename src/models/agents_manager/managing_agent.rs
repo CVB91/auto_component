@@ -1,4 +1,4 @@
-use crate::models::agent_basic::basic_agent::{BasicAgent, AgentState};
+use crate::models::agent_basic::basic_agent::{BasicAgent};
 use crate::models::agents::agent_traits::{FactSheet, SpecialFunctions};
 
 #[derive(Debug)]
