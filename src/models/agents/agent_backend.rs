@@ -288,7 +288,7 @@ impl SpecialFunctions for AgentBackendDeveloper {
                                 }
                             }
                             Err(e) => {
-                                // kill $(lsof -t -i:8080)
+                                // kill $(lsof -t -i:8080) -- this is the command to kill the server running on port 8080
                                 run_backend_server
                                     .kill()
                                     .expect("Failed to kill backend web server");
