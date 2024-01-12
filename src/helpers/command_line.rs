@@ -57,7 +57,7 @@ pub fn get_user_response(question: &str) -> String {
     return user_response.trim().to_string();
 }
 
-// Get user response that code is safe to execute
+// Get user response that code is safe to execute - this is important as there is the potential for the code to be malicious.
 pub fn confirm_safe_code() -> bool {
     let mut stdout: std::io::Stdout = stdout();
     loop {
