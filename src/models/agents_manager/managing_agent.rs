@@ -4,7 +4,7 @@ use crate::models::agents::agent_traits::{FactSheet, SpecialFunctions};
 use crate::ai_functions::aifunc_managing::convert_user_input_to_goal;
 use crate::helpers::general::ai_task_request;
 use crate::models::agents::agent_architect::AgentSolutionArchitect;
-// use crate::models::agents::agent_backend::AgentBackendDeveloper;
+use crate::models::agents::agent_backend::AgentBackendDeveloper;
 
 #[derive(Debug)]
 pub struct ManagingAgent {
@@ -54,10 +54,10 @@ impl ManagingAgent {
     fn add_agent(&mut self, agent: Box<dyn SpecialFunctions>) {
         self.agents.push(agent);
     }
-    // Can add as many agents as you want here
+    // Can add as many agents as you want here -- this can be expanded to include more agents such as a frontend developer, a designer, etc.
     fn create_agents(&mut self) {
         self.add_agent(Box::new(AgentSolutionArchitect::new()));
-        // self.add_agent(Box::new(AgentBackendDeveloper::new()));
+        self.add_agent(Box::new(AgentBackendDeveloper::new()));
     }
 
     pub async fn execute_project(&mut self) {
