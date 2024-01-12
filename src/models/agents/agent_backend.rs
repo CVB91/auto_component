@@ -266,7 +266,7 @@ impl SpecialFunctions for AgentBackendDeveloper {
                             testing_msg.as_str(),
                         );
 
-                        // Create client with timout
+                        // Create client with timout of 5 seconds to make an API call
                         let client: Client = Client::builder()
                             .timeout(Duration::from_secs(5))
                             .build()
@@ -274,6 +274,7 @@ impl SpecialFunctions for AgentBackendDeveloper {
 
                         // Test url
                         let url: String = format!("http://localhost:8080{}", endpoint.route);
+                        // check status code will make the API call
                         match check_status_code(&client, &url).await {
                             Ok(status_code) => {
                                 if status_code != 200 {
@@ -311,7 +312,7 @@ impl SpecialFunctions for AgentBackendDeveloper {
                     run_backend_server
                         .kill()
                         .expect("Failed to kill backend web server on completion");
-
+                    // very important line here - if this is not set to finished, then the agent will continue to run and cost money on the OPENAI API.
                     self.attributes.state = AgentState::Finished;
                 }
 
