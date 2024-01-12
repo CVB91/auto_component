@@ -28,7 +28,7 @@ impl AgentSolutionArchitect {
         Self { attributes }
     }
 
-    // Retrieve Project Scope from LLM 
+    // Retrieve Project Scope from LLM
     async fn call_project_scope(&mut self, factsheet: &mut FactSheet) -> ProjectScope {
         let msg_context: String = format!("{}", factsheet.project_description);
 

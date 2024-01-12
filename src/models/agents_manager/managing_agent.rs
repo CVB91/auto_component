@@ -54,7 +54,7 @@ impl ManagingAgent {
     fn add_agent(&mut self, agent: Box<dyn SpecialFunctions>) {
         self.agents.push(agent);
     }
-     // Can add as many agents as you want here
+    // Can add as many agents as you want here
     fn create_agents(&mut self) {
         self.add_agent(Box::new(AgentSolutionArchitect::new()));
         // self.add_agent(Box::new(AgentBackendDeveloper::new()));
@@ -63,8 +63,8 @@ impl ManagingAgent {
     pub async fn execute_project(&mut self) {
         self.create_agents();
 
-          // This is where Rust really excels, in another language we would pass ina  variable (here the factsheed in agent_res, and then have to pass that back and change it. Here we can pass a mutable reference and the agent can change it directly. This is a huge advantage of Rust.)
-          
+        // This is where Rust really excels, in another language we would pass ina  variable (here the factsheed in agent_res, and then have to pass that back and change it. Here we can pass a mutable reference and the agent can change it directly. This is a huge advantage of Rust.)
+
         for agent in &mut self.agents {
             let _agent_res: Result<(), Box<dyn std::error::Error>> =
                 agent.execute(&mut self.factsheet).await;
