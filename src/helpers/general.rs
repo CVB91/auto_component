@@ -7,7 +7,8 @@ use std::fs;
 
 const CODE_TEMPLATE_PATH: &str =
     "/Users/christian/Documents/web-server-boilerplate/src/code_template.rs";
-const EXEC_MAIN_PATH: &str = "/Users/christian/Documents/web-server-boilerplate/src/main.rs";
+pub const WEB_SERVER_PROJECT_PATH: &str = "/Users/christian/Documents/web-server-boilerplate";
+pub const EXEC_MAIN_PATH: &str = "/Users/christian/Documents/web-server-boilerplate/src/main.rs";
 const API_SCHEMA_PATH: &str = "/Users/christian/Documents/auto_component/schemas/api_schema.json";
 
 // This function is used to extend the ai function, it will run the ai function, get the string out of it, extend the string to tell OpenAI that it is a function printer, print the function, and then halluncinate the result of what the function will do. This is essentially uncharted territory.
